@@ -2,7 +2,7 @@
 
 namespace Bilet1.Helpers;
 
-public static class FileHelpers
+public static class FileHelper
 {
     public static bool CheckSize(this IFormFile file, int mb)
     {
@@ -27,5 +27,9 @@ public static class FileHelpers
         return uniqFileName;
     }
 
-    public static void FileDelete
+    public static void FileDelete(string path)
+    {
+        if(File.Exists(path))
+            File.Delete(path);
+    }
 }

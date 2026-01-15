@@ -92,8 +92,8 @@ public class TeamMemberController : Controller
         await _context.SaveChangesAsync();
 
         string deletedFilePath = Path.Combine(folderPath, teamMember.ImagePath);
-        if(System.IO.File.Exists(deletedFilePath)) 
-            System.IO.File.Delete(deletedFilePath);
+
+        FileHelper.FileDelete(deletedFilePath);
 
         return RedirectToAction(nameof(Index));
     }
@@ -152,9 +152,16 @@ public class TeamMemberController : Controller
         if(vm.Image is { })
         {
             string newImagePath = await vm.Image.FileUploadAsync(folderPath);
+            
+            string deletedImagePath = Path.Combine(folderPath, newImagePath);
+            FileHelper.FileDelete(deletedImagePath);
+
+            existTeamMember.ImagePath = newImagePath;
         }
 
-
+        _context.TeamMembers.Update(existTeamMember);
+        await _context.SaveChangesAsync();
+        return RedirectToAction(nameof(Index));
     }
 
     private async Task SendMemberPositionsWithViewBag()
