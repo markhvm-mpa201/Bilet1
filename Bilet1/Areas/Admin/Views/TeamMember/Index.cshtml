@@ -30,8 +30,8 @@
                             <img src="~/img/@teamMember.ImagePath" />
                         </td>
                         <td>
-                            <a asp-action="Update" asp-all-route-id="@teamMember.Id" class="btn btn-warning">Update</a>
-                            <a asp-action="Delete" asp-all-route-id="@teamMember.Id" class="btn btn-danger">Delete</a>
+                            <a asp-action="Update" asp-route-id="@teamMember.Id" class="btn btn-warning">Update</a>
+                            <a asp-action="Delete" asp-route-id="@teamMember.Id" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                 }               

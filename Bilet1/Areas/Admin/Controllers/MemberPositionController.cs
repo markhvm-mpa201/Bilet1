@@ -10,6 +10,9 @@ namespace Bilet1.Areas.Admin.Controllers;
 [Area("Admin")]
 public class MemberPositionController(AppDbContext _context, IWebHostEnvironment _environment) : Controller
 {
+
+
+
     public async Task<IActionResult> IndexAsync()
     {
         var memberPositions = await _context.MemberPositions.Select(memberPosition => new MemberPositionGetVM()
