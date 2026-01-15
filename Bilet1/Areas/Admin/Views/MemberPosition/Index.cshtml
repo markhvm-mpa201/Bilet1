@@ -1,0 +1,34 @@
+﻿@model List<MemberPositionGetVM>
+<div class="container">
+    <div class="row">
+        <div class="col text-end">
+            <a asp-action="Create" class="btn btn-success">Create</a>
+        </div>
+    </div>
+    <div class="row">
+
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>                    
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var teamMember in Model)
+                {
+                    <tr>
+                        <th scope="row">@teamMember.Id</th>
+                        <td>@teamMember.Name</td>
+                        <td>
+                            <a asp-action="Update" asp-all-route-id="@teamMember.Id" class="btn btn-warning">Update</a>
+                            <a asp-action="Delete" asp-all-route-id="@teamMember.Id" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
