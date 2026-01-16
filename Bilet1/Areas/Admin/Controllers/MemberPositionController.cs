@@ -1,6 +1,7 @@
 ﻿using Bilet1.Contexts;
 using Bilet1.Helpers;
 using Bilet1.ViewModels;
+using Bilet1.ViewModels.MemberPositions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Bilet1.ViewModels;
+namespace Bilet1.ViewModels.TeamMember;
 
 public class TeamMemberUpdateVM
 {

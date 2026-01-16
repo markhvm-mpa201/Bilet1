@@ -1,4 +1,5 @@
 using Bilet1.Contexts;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bilet1
@@ -11,6 +12,11 @@ namespace Bilet1
 
             builder.Services.AddDbContext<AppDbContext>(
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("NAA")));
+
+            builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+
+            }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

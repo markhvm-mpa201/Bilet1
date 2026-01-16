@@ -1,4 +1,4 @@
-﻿namespace Bilet1.ViewModels;
+﻿namespace Bilet1.ViewModels.TeamMember;
 
 public class TeamMemberGetVM
 {
