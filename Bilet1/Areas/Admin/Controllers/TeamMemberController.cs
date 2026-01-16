@@ -23,6 +23,7 @@ public class TeamMemberController : Controller
         folderPath = Path.Combine(_environment.WebRootPath, "img");
     }
 
+
     public async Task<IActionResult> IndexAsync()
     {
         var teamMembers = await _context.TeamMembers.Select(teamMember => new TeamMemberGetVM()
@@ -133,7 +134,7 @@ public class TeamMemberController : Controller
             return View(vm);
         }
 
-        if (vm.Image?.CheckSize(2) ?? false)
+        if (!vm.Image?.CheckSize(2) ?? false)
         {
             ModelState.AddModelError("Image", "Image max size must be 2 MB");
             return View(vm);
