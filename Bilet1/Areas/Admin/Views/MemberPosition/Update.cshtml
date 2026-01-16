@@ -1,16 +1,29 @@
 ﻿@model MemberPositionUpdateVM
-<div class="container">
-    <div class="row">
-        <form method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label asp-for="Name">Name</label>
-                <input class="form-control" asp-for="Name" placeholder="Enter name">
-                <span asp-validation-for="Name" class="text-danger"></span>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header">
+                    <h5 class="mb-0">Update Member Position</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="Enter name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Update</button>
+                        <a asp-action="Index" class="btn btn-secondary ms-2">Cancel</a>
+                    </form>
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+        </div>
     </div>
 </div>
+
 @section Scripts {
-    <partial name="_ValidationScriptsPartial"></partial>
+    <partial name="_ValidationScriptsPartial" />
 }

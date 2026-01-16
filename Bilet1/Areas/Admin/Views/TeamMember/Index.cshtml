@@ -1,46 +1,46 @@
 ﻿@model List<TeamMemberGetVM>
-<div class="container
-    <div class="row">
 
-        <table class="table table-dark">
-            <thead>
+<div class="card shadow-sm my-3 w-100">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Team Members</h5>
+        <a asp-action="Create" class="btn btn-success btn-sm">+ Create member</a>
+    </div>
+
+    <div class="card-body p-0 table-responsive">
+        <table class="table table-hover table-striped mb-0 align-middle w-100">
+            <thead class="table-dark">
                 <tr>
-                    <th scope="col">
-                        <div class="row">
-                            <div class="col text-end">
-                                <a asp-action="Create" class="btn btn-success">Create member</a>
-                            </div>
-                        </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Position</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Actions</th>
+                    <th style="width: 60px;">Id</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Description</th>
+                    <th style="width: 100px;">Image</th>
+                    <th style="width: 180px;" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var teamMember in Model)
                 {
                     <tr>
-                        <th scope="row">@teamMember.Id</th>
+                        <td>@teamMember.Id</td>
                         <td>@teamMember.Name</td>
                         <td>@teamMember.MemberPositionName</td>
-                        <td>@teamMember.Description</td>
-                        <td>
-                            <img src="~/img/@teamMember.ImagePath" />
+                        <td style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                            @teamMember.Description
                         </td>
                         <td>
-                            <a asp-action="Update" asp-route-id="@teamMember.Id" class="btn btn-warning">Update</a>
-                            <a asp-action="Delete" asp-route-id="@teamMember.Id" class="btn btn-danger">Delete</a>
+                            <img src="~/img/@teamMember.ImagePath" class="img-fluid rounded" style="max-height: 60px;" />
+                        </td>
+                        <td class="text-center">
+                            <a asp-action="Update" asp-route-id="@teamMember.Id" class="btn btn-warning btn-sm me-1">Update</a>
+                            <a asp-action="Delete" asp-route-id="@teamMember.Id" class="btn btn-danger btn-sm"
+                               onclick="return confirm('Are you sure you want to delete this member?');">
+                                Delete
+                            </a>
                         </td>
                     </tr>
-                }               
+                }
             </tbody>
         </table>
-
     </div>
 </div>

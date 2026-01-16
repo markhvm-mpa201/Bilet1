@@ -54,6 +54,7 @@ public class TeamMemberController : Controller
         if (!isExistMemberPosition)
         {
             ModelState.AddModelError("MemberPositionId", "This position is not found");
+            ModelState.AddModelError("MemberPositionId", "This position is not found");
             return View(vm);
         }
 
@@ -154,7 +155,7 @@ public class TeamMemberController : Controller
         {
             string newImagePath = await vm.Image.FileUploadAsync(folderPath);
             
-            string deletedImagePath = Path.Combine(folderPath, newImagePath);
+            string deletedImagePath = Path.Combine(folderPath, existTeamMember.ImagePath);
             FileHelper.FileDelete(deletedImagePath);
 
             existTeamMember.ImagePath = newImagePath;
