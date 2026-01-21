@@ -2,12 +2,13 @@ using Bilet1.Contexts;
 using Bilet1.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Bilet1
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,8 @@ namespace Bilet1
             var scope = app.Services.CreateScope();
 
             var initializer = scope.ServiceProvider.GetRequiredService<DbContextInitializer>();
+
+            await initializer.InitDatabaseAsync();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
