@@ -1,7 +1,6 @@
 ﻿using Bilet1.ViewModels.UserViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Bilet1.Controllers;
 
@@ -11,9 +10,6 @@ public class AccountController(UserManager<AppUser> _userManager, SignInManager<
     {
         return View();
     }
-
-    [HttpPost]
-
 
     public IActionResult Register()
     {
@@ -42,6 +38,15 @@ public class AccountController(UserManager<AppUser> _userManager, SignInManager<
         }
         return RedirectToAction("Index", "Home");
     }
+
+    public async Task<IActionResult> Logout()
+    {
+        await _signInManager.SignOutAsync();
+
+        return RedirectToAction("Login");
+    }
+
+    [HttpPost]
     public async Task<IActionResult> Register(RegisterVM vm)
     {
         if (!ModelState.IsValid) return View(vm);
@@ -68,15 +73,5 @@ public class AccountController(UserManager<AppUser> _userManager, SignInManager<
         await _signInManager.SignInAsync(user, false);
 
         return RedirectToAction("Index", "Home");
-    }
-
-    public async Task<IActionResult> CreateRoles()
-    {
-        await _roleManager.CreateAsync(new() { Name = "Admin" });
-        await _roleManager.CreateAsync(new() { Name = "Member" });
-        await _roleManager.CreateAsync(new() { Name = "Moderator" });
-
-
-        return Ok("Roles were created");
     }
 }

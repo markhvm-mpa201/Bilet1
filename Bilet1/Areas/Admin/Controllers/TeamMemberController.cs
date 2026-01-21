@@ -1,14 +1,15 @@
 ﻿using Bilet1.Contexts;
 using Bilet1.Helpers;
 using Bilet1.ViewModels.TeamMember;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace Bilet1.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 
 public class TeamMemberController : Controller
 {
@@ -82,7 +83,7 @@ public class TeamMemberController : Controller
 
         await _context.TeamMembers.AddAsync(teamMember);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Delete(int id)
@@ -97,7 +98,7 @@ public class TeamMemberController : Controller
 
         FileHelper.FileDelete(deletedFilePath);
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Update(int id) 
@@ -163,7 +164,7 @@ public class TeamMemberController : Controller
 
         _context.TeamMembers.Update(existTeamMember);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index");
     }
 
     private async Task SendMemberPositionsWithViewBag()

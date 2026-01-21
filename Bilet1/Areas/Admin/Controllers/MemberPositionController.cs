@@ -2,14 +2,14 @@
 using Bilet1.Helpers;
 using Bilet1.ViewModels;
 using Bilet1.ViewModels.MemberPositions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace Bilet1.Areas.Admin.Controllers;
 
 [Area("Admin")]
+[Authorize(Roles = "Admin")]
 public class MemberPositionController : Controller
 {
     private readonly AppDbContext _context;
@@ -46,7 +46,7 @@ public class MemberPositionController : Controller
 
         await _context.MemberPositions.AddAsync(memberPosition);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index");
     }
 
     
@@ -57,7 +57,7 @@ public class MemberPositionController : Controller
 
         _context.MemberPositions.Remove(memberPosition);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index");
     }
 
     public async Task<IActionResult> Update(int id) 
@@ -83,6 +83,6 @@ public class MemberPositionController : Controller
         existMemberPosition.Name = vm.Name;
         _context.MemberPositions.Update(existMemberPosition);
         await _context.SaveChangesAsync();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction("Index");
     }
 }

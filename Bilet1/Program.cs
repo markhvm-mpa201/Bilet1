@@ -1,4 +1,5 @@
 using Bilet1.Contexts;
+using Bilet1.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,17 +12,23 @@ namespace Bilet1
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDbContext<AppDbContext>(
-                options => options.UseSqlServer(builder.Configuration.GetConnectionString("NAA")));
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("Home")));
 
             builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
             {
 
             }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
+            builder.Services.AddScoped<DbContextInitializer>();
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
+
+            var scope = app.Services.CreateScope();
+
+            var initializer = scope.ServiceProvider.GetRequiredService<DbContextInitializer>();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -36,6 +43,7 @@ namespace Bilet1
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(

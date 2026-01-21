@@ -55,6 +55,16 @@
                         <a href="testimonial.html" class="dropdown-item">Testimonial</a>
                     </div>
                 </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Account" asp-action="Logout" class="nav-item nav-link">@User.Identity.Name</a>
+
+                }
+                else
+                {
+                    <a asp-controller="Account" asp-action="Login" class="nav-item nav-link">Login</a>
+                    <a asp-controller="Account" asp-action="Register" class="nav-item nav-link">Register</a>
+                }
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
                 <a href="tel:+123456789" class="nav-item nav-link nav-contact bg-secondary text-white px-5 ms-lg-5"><i class="bi bi-telephone-outbound me-2"></i>+123 456 789</a>
             </div>
